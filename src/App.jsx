@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
 
   const handleTitle = (e) => {
     setTaskTitle(e.target.value);
@@ -13,54 +13,85 @@ function App() {
     setTaskDescription(e.target.value);
   };
 
+  const handleDelete = (id) => {
+    // unique id for the task should be Added because
+    // abhi jitne bhee task same title ke hai vo eksaath delete ho rhe
+
+    console.log("kounsa task del ho rha:", id);
+    const updatedTasks = tasks.filter((task) => task.title !== id);
+    console.log("new tasks:", updatedTasks);
+    setTasks(updatedTasks);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskTitle && taskDescription) {
       const newTask = { title: taskTitle, description: taskDescription };
       setTasks([...tasks, newTask]);
-      setTaskTitle('');
-      setTaskDescription('');
+      setTaskTitle("");
+      setTaskDescription("");
     }
   };
 
   return (
-    <div className='h-screen bg-zinc-800 p-0 m-0'>
-      <h2 className='text-center text-white text-3xl font-bold p-10'>Tasks To be Done</h2>
-      <form action="" className='flex justify-center items-center' onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className='m-2 p-2 rounded'
-          placeholder='Task Title'
-          value={taskTitle}
-          onChange={handleTitle}
-        />
-        <input
-          type="text"
-          name="description"
-          id="description"
-          className='m-2 p-2 rounded'
-          placeholder='Task Description'
-          value={taskDescription}
-          onChange={handleDescription}
-        />
-        <button
-          type="submit"
-          className='text-white bg-green-500 hover:bg-green-700 p-2 rounded m-2'
+    <div className=" h-screen bg-zinc-800 m-0 p-0">
+      <h2 className="text-center text-white text-3xl font-bold p-10">
+        Tasks To be Done
+      </h2>
+      <div className="flex flex-col items-center justify-center">
+        <form
+          action=""
+          className="w-full max-w-md flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center"
+          onSubmit={handleSubmit}
         >
-          + Add Task
-        </button>
-      </form>
+          <input
+            type="text"
+            className="flex-grow m-2 p-2 rounded"
+            placeholder="Task Title"
+            value={taskTitle}
+            onChange={handleTitle}
+          />
+          <input
+            type="text"
+            name="description"
+            id="description"
+            className="flex-grow m-2 p-2 rounded"
+            placeholder="Task Description"
+            value={taskDescription}
+            onChange={handleDescription}
+          />
+          <button
+            type="submit"
+            className=" text-white bg-green-500 hover:bg-green-700 p-2 rounded m-2"
+          >
+            + Add Task
+          </button>
+        </form>
+      </div>
 
-      <div className='mt-10 p-5 bg-zinc-700 text-white rounded'>
-        <h3 className='text-xl font-bold mb-4'>Your Tasks</h3>
+      <div className=" m-10 p-5 bg-zinc-700 text-white rounded">
+        <h3 className="text-xl font-bold mb-4">Your Tasks</h3>
         <ul>
           {tasks.length === 0 ? (
             <li>No Tasks Yet</li>
           ) : (
             tasks.map((task, index) => (
-              <li key={index} className='p-2 bg-zinc-600 mt-2 rounded'>
-                {task.title} - {task.description}
-              </li>
+              <div className="flex justify-between items-center p-2 bg-zinc-600 mt-2 rounded">
+                {/* <span className=" bg-zinc-600 rounded"> */}
+                <li key={index} className="flex-grow">
+                  {task.title} - {task.description}
+                </li>
+                {/* </span> */}
+
+                {/* <div className="text-white bg-red-400 hover:bg-red-700 rounded"> */}
+                <button
+                  className="p-1 text-white bg-red-400 hover:bg-red-700 rounded"
+                  onClick={() => handleDelete(task.title)}
+                >
+                  Delete
+                </button>
+                {/* </div> */}
+              </div>
             ))
           )}
         </ul>
