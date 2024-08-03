@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import deleteIcon from './assets/deleteicon.jpg';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -14,26 +15,13 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    // unique id for the task should be Added because
-    // abhi jitne bhee task same title ke hai vo eksaath delete ho rhe
-
-<<<<<<< HEAD
-    // console.log("kounsa task del ho rha:", id);
-    // const updatedTasks = tasks.filter((task) => task.title !== id);
-    // console.log("new tasks:", updatedTasks);
-    // setTasks(updatedTasks);
 
     console.log("kounsa task del ho rha:", id);
     const updatedTasks = tasks.filter((_, index) => index !== id);
-=======
-    console.log("kounsa task del ho rha:", id);
-    const updatedTasks = tasks.filter((task) => task.title !== id);
->>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
     console.log("new tasks:", updatedTasks);
     setTasks(updatedTasks);
   };
 
-<<<<<<< HEAD
   const toggleComplete = (index) => {
     const newTasks = tasks.map((task, i) => {
       if (i === index) {
@@ -44,8 +32,6 @@ function App() {
     setTasks(newTasks);
   };
 
-=======
->>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskTitle && taskDescription) {
@@ -57,14 +43,14 @@ function App() {
     }
   };
 
-<<<<<<< HEAD
 
   return (
-    <div className=" h-screen bg-zinc-800 m-0 p-0">
-      <h2 className="text-center text-white text-3xl font-bold p-10">
+    <div className=" min-h-screen flex items-center justify-center bg-gray-950">
+      <div className="p-4  flex-col w-full max-w-2xl items-center justify-center ">
+      <h2 className=" text-center text-white text-3xl font-bold p-10">
         Tasks To be Done
       </h2>
-      <div className="flex flex-col items-center justify-center">
+      <div className="p-4 flex flex-col items-center justify-center w-full">
         <form
           action=""
           className="w-full max-w-md flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center"
@@ -88,101 +74,81 @@ function App() {
           />
           <button
             type="submit"
-            className=" text-white bg-green-500 hover:bg-green-700 p-2 rounded m-2"
+            className=" text-white bg-lime-400 hover:bg-lime-600 p-2 rounded m-2"
           >
             + Add Task
           </button>
         </form>
       </div>
 
-=======
-  return (
-    <div className=" h-screen bg-zinc-800 m-0 p-0">
-      <h2 className="text-center text-white text-3xl font-bold p-10">
-        Tasks To be Done
-      </h2>
-      <div className="flex flex-col items-center justify-center">
-        <form
-          action=""
-          className="w-full max-w-md flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center"
-          onSubmit={handleSubmit}
-        >
-          <input
-            type="text"
-            className="flex-grow m-2 p-2 rounded"
-            placeholder="Task Title"
-            value={taskTitle}
-            onChange={handleTitle}
-          />
-          <input
-            type="text"
-            name="description"
-            id="description"
-            className="flex-grow m-2 p-2 rounded"
-            placeholder="Task Description"
-            value={taskDescription}
-            onChange={handleDescription}
-          />
-          <button
-            type="submit"
-            className=" text-white bg-green-500 hover:bg-green-700 p-2 rounded m-2"
-          >
-            + Add Task
-          </button>
-        </form>
-      </div>
-
->>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
-      <div className=" m-10 p-5 bg-zinc-700 text-white rounded">
+      <div className=" flex flex-col p-5 bg-zinc-700 text-white rounded w-full">
         <h3 className="text-xl font-bold mb-4">Your Tasks</h3>
-        <ul>
+        <ul className="w-full">
           {tasks.length === 0 ? (
-            <li>No Tasks Yet</li>
+            <li className="text-center">No Tasks Yet</li>
           ) : (
             tasks.map((task, index) => (
-              <div className="flex justify-between items-center p-2 bg-zinc-600 mt-2 rounded">
-                {/* <span className=" bg-zinc-600 rounded"> */}
-                <li key={index} className="flex-grow">
-<<<<<<< HEAD
-                <span className={task.completed ? 'line-through' : ''}>
-                  {task.title} - {task.description}
-                </span>
-=======
-                  {task.title} - {task.description}
->>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
-                </li>
-                {/* </span> */}
-
-                {/* <div className="text-white bg-red-400 hover:bg-red-700 rounded"> */}
-<<<<<<< HEAD
-
-                <input
+              <div className="flex justify-between items-center my-3 p-2 bg-gray-950 border-2 border-stone-400 rounded">
+                
+                {/* <input
                   type="checkbox"
                   checked={task.completed}
                   onChange={() => toggleComplete(index)}
                   className='mr-2'
-                />
+                /> */}
 
-                <button
+                <button className=" flex items-center text-white p-2 rounded-lg focus:outline-none"
+                onClick={() => toggleComplete(index)}>
+                  <svg
+                            className="mr-2"
+                            height="24"
+                            width="24"
+                            viewBox="0 0 24 24"
+                            fill={task.completed ? "rgb(34, 197, 94)" : "none"}
+                            stroke={task.completed ? "white" : "none"}
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            >
+                    <circle cx="12" cy="12" r="10" stroke={task.completed ? "rgb(34, 197, 94)" : "rgb(34, 197, 94)"}  />
+                  </svg>
+                
+                  
+                {/* <li key={index} className="flex-grow"> */}
+                <span className={task.completed ? 'line-through' : ''}>
+                  {task.title} - {task.description}
+                </span>
+                </button>
+                {/* </li> */}
+                
+      
+
+                {/* <button
                   className="p-1 text-white bg-red-400 hover:bg-red-700 rounded"
                   // onClick={() => handleDelete(task.title)}
                   onClick={() => handleDelete(index)}
-=======
-                <button
-                  className="p-1 text-white bg-red-400 hover:bg-red-700 rounded"
-                  onClick={() => handleDelete(task.title)}
->>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
                 >
                   Delete
+                </button> */}
+
+
+                <button onClick={() => handleDelete(index)}>
+                  <img src={deleteIcon}
+                      alt="Delete" 
+                      width="32" 
+                      height="34" />
                 </button>
-                {/* </div> */}
+
+                
               </div>
             ))
           )}
         </ul>
+      </div>
       </div>
     </div>
   );
 }
 
 export default App;
+
