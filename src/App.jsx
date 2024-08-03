@@ -17,6 +17,7 @@ function App() {
     // unique id for the task should be Added because
     // abhi jitne bhee task same title ke hai vo eksaath delete ho rhe
 
+<<<<<<< HEAD
     // console.log("kounsa task del ho rha:", id);
     // const updatedTasks = tasks.filter((task) => task.title !== id);
     // console.log("new tasks:", updatedTasks);
@@ -24,10 +25,15 @@ function App() {
 
     console.log("kounsa task del ho rha:", id);
     const updatedTasks = tasks.filter((_, index) => index !== id);
+=======
+    console.log("kounsa task del ho rha:", id);
+    const updatedTasks = tasks.filter((task) => task.title !== id);
+>>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
     console.log("new tasks:", updatedTasks);
     setTasks(updatedTasks);
   };
 
+<<<<<<< HEAD
   const toggleComplete = (index) => {
     const newTasks = tasks.map((task, i) => {
       if (i === index) {
@@ -38,6 +44,8 @@ function App() {
     setTasks(newTasks);
   };
 
+=======
+>>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
   const handleSubmit = (e) => {
     e.preventDefault();
     if (taskTitle && taskDescription) {
@@ -49,6 +57,7 @@ function App() {
     }
   };
 
+<<<<<<< HEAD
 
   return (
     <div className=" h-screen bg-zinc-800 m-0 p-0">
@@ -86,6 +95,44 @@ function App() {
         </form>
       </div>
 
+=======
+  return (
+    <div className=" h-screen bg-zinc-800 m-0 p-0">
+      <h2 className="text-center text-white text-3xl font-bold p-10">
+        Tasks To be Done
+      </h2>
+      <div className="flex flex-col items-center justify-center">
+        <form
+          action=""
+          className="w-full max-w-md flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center"
+          onSubmit={handleSubmit}
+        >
+          <input
+            type="text"
+            className="flex-grow m-2 p-2 rounded"
+            placeholder="Task Title"
+            value={taskTitle}
+            onChange={handleTitle}
+          />
+          <input
+            type="text"
+            name="description"
+            id="description"
+            className="flex-grow m-2 p-2 rounded"
+            placeholder="Task Description"
+            value={taskDescription}
+            onChange={handleDescription}
+          />
+          <button
+            type="submit"
+            className=" text-white bg-green-500 hover:bg-green-700 p-2 rounded m-2"
+          >
+            + Add Task
+          </button>
+        </form>
+      </div>
+
+>>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
       <div className=" m-10 p-5 bg-zinc-700 text-white rounded">
         <h3 className="text-xl font-bold mb-4">Your Tasks</h3>
         <ul>
@@ -96,13 +143,18 @@ function App() {
               <div className="flex justify-between items-center p-2 bg-zinc-600 mt-2 rounded">
                 {/* <span className=" bg-zinc-600 rounded"> */}
                 <li key={index} className="flex-grow">
+<<<<<<< HEAD
                 <span className={task.completed ? 'line-through' : ''}>
                   {task.title} - {task.description}
                 </span>
+=======
+                  {task.title} - {task.description}
+>>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
                 </li>
                 {/* </span> */}
 
                 {/* <div className="text-white bg-red-400 hover:bg-red-700 rounded"> */}
+<<<<<<< HEAD
 
                 <input
                   type="checkbox"
@@ -115,6 +167,11 @@ function App() {
                   className="p-1 text-white bg-red-400 hover:bg-red-700 rounded"
                   // onClick={() => handleDelete(task.title)}
                   onClick={() => handleDelete(index)}
+=======
+                <button
+                  className="p-1 text-white bg-red-400 hover:bg-red-700 rounded"
+                  onClick={() => handleDelete(task.title)}
+>>>>>>> de853ecda9916b1124552fe8771aa741a345e30a
                 >
                   Delete
                 </button>
