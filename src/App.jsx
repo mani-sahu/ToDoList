@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import deleteIcon from './assets/deleteicon.jpg';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [completedTasksCount, setCompletedTasksCount] = useState(0);
+
+  useEffect(() => {
+    // Calculate the number of completed tasks whenever tasks change
+    const countCompletedTasks = tasks.reduce((acc, task) => task.completed ? acc + 1 : acc, 0);
+    setCompletedTasksCount(countCompletedTasks);
+  }, [tasks]);
 
   const handleTitle = (e) => {
     setTaskTitle(e.target.value);
@@ -47,9 +54,8 @@ function App() {
   return (
     <div className=" min-h-screen flex items-center justify-center bg-gray-950">
       <div className="p-4  flex-col w-full max-w-2xl items-center justify-center ">
-      <h2 className=" text-center text-white text-3xl font-bold p-10">
-        Tasks To be Done
-      </h2>
+      <h2 className=" text-center text-yellow-300 text-3xl font-bold p-10">Tasks To be Done [ {completedTasksCount} / {tasks.length} ]</h2>
+      {/* <h2 className=" text-center text-white text-xl font-bold">{completedTasksCount} out of {tasks.length}</h2> */}
       <div className="p-4 flex flex-col items-center justify-center w-full">
         <form
           action=""
@@ -74,7 +80,7 @@ function App() {
           />
           <button
             type="submit"
-            className=" text-white bg-lime-400 hover:bg-lime-600 p-2 rounded m-2"
+            className=" text-white bg-lime-500 hover:bg-lime-800 p-2 rounded m-2 w-full"
           >
             + Add Task
           </button>
@@ -116,7 +122,7 @@ function App() {
                   
                 {/* <li key={index} className="flex-grow"> */}
                 <span className={task.completed ? 'line-through' : ''}>
-                  {task.title} - {task.description}
+                  {task.title} : {task.description}
                 </span>
                 </button>
                 {/* </li> */}
@@ -134,6 +140,7 @@ function App() {
 
                 <button onClick={() => handleDelete(index)}>
                   <img src={deleteIcon}
+                      className="text-red-600"
                       alt="Delete" 
                       width="32" 
                       height="34" />
